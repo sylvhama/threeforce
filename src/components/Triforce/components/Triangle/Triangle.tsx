@@ -25,7 +25,7 @@ export const Triangle = forwardRef<THREE.Mesh, Props>(
     };
 
     return (
-      <mesh ref={ref} position={[0, 0, 0]}>
+      <mesh ref={ref}>
         <extrudeGeometry args={[shape, extrudeSettings]} />
         <meshStandardMaterial color="#eec036" />
       </mesh>
