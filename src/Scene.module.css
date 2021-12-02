@@ -1,6 +1,5 @@
 :root {
   --reveal-duration: 0.33s;
-  --reveal-delay: 1.2s;
 }
 
 .StartContainer {
@@ -41,7 +40,7 @@
   height: 100vh;
   background-color: var(--background);
   transition: background-color var(--reveal-duration) ease;
-  transition-delay: var(--reveal-delay);
+  transition-delay: 2.5s;
 }
 
 .TransitionDone {
@@ -50,9 +49,13 @@
 
 .MainContainer.TransitionDone::before,
 .MainContainer.TransitionDone::after,
-.MainContainer.TransitionDone .TitleContainer,
+.MainContainer.TransitionDone .TitleWrapper,
 .MainContainer.TransitionDone footer {
   opacity: 1;
+}
+
+.MainContainer.TransitionDone .Sword {
+  transform: translateY(0);
 }
 
 .MainContainer::before,
@@ -74,7 +77,7 @@
   bottom: 0;
 }
 
-.TitleContainer {
+.TitleWrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -86,7 +89,30 @@
   text-shadow: 0 0 2px var(--background);
   opacity: 0;
   transition: opacity var(--reveal-duration) ease;
-  transition-delay: var(--reveal-delay);
+  transition-delay: 1.2s;
+}
+
+.TitleContainer {
+  position: relative;
+}
+
+.Sword {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  height: 200px;
+  transform: translateY(-100vh);
+  transition: transform var(--reveal-duration)
+    cubic-bezier(0.36, 0, 0.66, -0.56);
+  transition-delay: 2.2s;
+}
+
+.Z {
+  position: absolute;
+  top: 2rem;
+  user-select: none;
+  clip-path: polygon(0% 50%, 100% 10%, 30% 90%, 0% 90%);
+  text-shadow: none;
 }
 
 h1 {
@@ -103,7 +129,8 @@ h1 {
   left: 90px;
 }
 
-.Zelda {
+.Zelda,
+.Z {
   color: #bc140f;
   font-size: 8rem;
 }
@@ -126,5 +153,5 @@ footer {
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   opacity: 0;
   transition: opacity var(--reveal-duration) ease;
-  transition-delay: var(--reveal-delay);
+  transition-delay: 1.2s;
 }

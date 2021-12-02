@@ -8,6 +8,26 @@ import { Triforce } from "./components";
 import titleSound from "./components/Triforce/title.mp3";
 // @ts-ignore
 import styles from "./Scene.module.css";
+// @ts-ignore
+import masterSword from "./mastersword.gif";
+
+function Title() {
+  return (
+    <div className={styles.TitleWrapper}>
+      <div className={styles.TitleContainer}>
+        <img className={styles.Sword} src={masterSword} alt="Master Sword" />
+        <h1>
+          <span className={styles.Legend}>the legend of</span>
+          <span className={styles.Zelda}>Zelda</span>
+          <span className={styles.Z} aria-hidden="true">
+            Z
+          </span>
+          <span className={styles.Link}>a link to the past</span>
+        </h1>
+      </div>
+    </div>
+  );
+}
 
 export function Scene() {
   const [isStarted, setIsStarted] = useState(false);
@@ -42,13 +62,7 @@ export function Scene() {
         <Triforce onFinish={() => setIsAnimationDone(true)} />
         <pointLight position={[0, 0, -200]} />
       </Canvas>
-      <div className={styles.TitleContainer}>
-        <h1>
-          <span className={styles.Legend}>the legend of</span>
-          <span className={styles.Zelda}>Zelda</span>
-          <span className={styles.Link}>a link to the past</span>
-        </h1>
-      </div>
+      <Title />
       <footer>© 2021 Sylvain Hamann </footer>
     </div>
   );
