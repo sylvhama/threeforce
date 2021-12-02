@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 
 import { Triangle } from "./components";
@@ -17,8 +17,9 @@ function useTrianglePosition(
 
   useFrame(() => {
     if (ref.current) {
-      const stepY = down ? -0.5 : 0.5;
-      const stepX = left ? -0.5 : 0.5;
+      const step = 0.25;
+      const stepY = down ? -step : step;
+      const stepX = left ? -step : step;
 
       if (y !== destinationY) {
         setY((y) => y + stepY);
@@ -40,8 +41,17 @@ function useTrianglePosition(
   };
 }
 
-export function Triforce() {
+interface Props {
+  play(): void;
+}
+
+export function Triforce({ play }: Props) {
+  useEffect(() => {
+    play();
+  }, [play]);
+
   const { x: topX, y: topY, ref: topRef } = useTrianglePosition(0, 104, 0, 24);
+
   const { x: leftX, y: leftY, ref: leftRef } = useTrianglePosition(
     89,
     -72,
@@ -49,6 +59,7 @@ export function Triforce() {
     6,
     false
   );
+
   const { x: rightX, y: rightY, ref: rightRef } = useTrianglePosition(
     -89,
     -72,
