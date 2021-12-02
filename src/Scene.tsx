@@ -5,17 +5,26 @@ import useSound from "use-sound";
 import { Triforce } from "./components";
 
 // @ts-ignore
-import titleSound from "./components/Triforce/title.mp3";
+import titleSound from "./assets/title.mp3";
+// @ts-ignore
+import swordSound from "./assets/sword.mp3";
 // @ts-ignore
 import styles from "./Scene.module.css";
 // @ts-ignore
-import masterSword from "./mastersword.gif";
+import masterSword from "./assets/mastersword.gif";
 
 function Title() {
+  const [playSword] = useSound(swordSound);
+
   return (
     <div className={styles.TitleWrapper}>
       <div className={styles.TitleContainer}>
-        <img className={styles.Sword} src={masterSword} alt="Master Sword" />
+        <img
+          className={styles.Sword}
+          onTransitionEnd={() => playSword()}
+          src={masterSword}
+          alt="Master Sword"
+        />
         <h1>
           <span className={styles.Legend}>the legend of</span>
           <span className={styles.Zelda}>Zelda</span>
@@ -33,7 +42,7 @@ export function Scene() {
   const [isStarted, setIsStarted] = useState(false);
   const [isAnimationDone, setIsAnimationDone] = useState(false);
 
-  const [play] = useSound(titleSound);
+  const [playTitle] = useSound(titleSound);
 
   if (!isStarted)
     return (
@@ -43,7 +52,7 @@ export function Scene() {
           type="button"
           onClick={() => {
             setIsStarted(true);
-            play();
+            playTitle();
           }}
         >
           Start
