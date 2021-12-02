@@ -8,7 +8,8 @@ function useTrianglePosition(
   originY: number,
   destinationX: number,
   destinationY: number,
-  down = true
+  down = true,
+  left = true
 ) {
   const [x, setX] = useState(originX);
   const [y, setY] = useState(originY);
@@ -16,10 +17,18 @@ function useTrianglePosition(
 
   useFrame(() => {
     if (ref.current) {
-      const step = down ? -0.5 : 0.5;
+      const stepY = down ? -0.5 : 0.5;
+      const stepX = left ? -0.5 : 0.5;
 
       if (y !== destinationY) {
-        setY((y) => y + step);
+        setY((y) => y + stepY);
+        ref.current.rotateY(0.08);
+      } else {
+        ref.current.rotation.y = 0;
+      }
+
+      if (x !== destinationX) {
+        setX((x) => x + stepX);
       }
     }
   });
@@ -32,36 +41,29 @@ function useTrianglePosition(
 }
 
 export function Triforce() {
-  const groupRef = useRef<THREE.Mesh>(null);
-
-  useFrame(() => {
-    if (groupRef.current) {
-      groupRef.current.rotateY(0.05);
-    }
-  });
-
   const { x: topX, y: topY, ref: topRef } = useTrianglePosition(0, 104, 0, 24);
   const { x: leftX, y: leftY, ref: leftRef } = useTrianglePosition(
-    9,
-    -78,
+    89,
+    -72,
     9,
     6,
     false
   );
   const { x: rightX, y: rightY, ref: rightRef } = useTrianglePosition(
-    -9,
-    -78,
+    -89,
+    -72,
     -9,
     6,
+    false,
     false
   );
 
   return (
-    <group ref={groupRef}>
+    <>
       <Triangle ref={topRef} x={topX} y={topY} />
       <Triangle ref={leftRef} x={leftX} y={leftY} />
       <Triangle ref={rightRef} x={rightX} y={rightY} />
-    </group>
+    </>
   );
 }
 

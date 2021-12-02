@@ -10,10 +10,10 @@ interface Props {
 export const Triangle = forwardRef<THREE.Mesh, Props>(
   ({ x, y, length = 8 }, ref) => {
     const shape = new Shape()
-      .moveTo(x, y)
-      .lineTo(x - length, y + length * -2)
-      .lineTo(x + length, y + length * -2)
-      .lineTo(x, y);
+      .moveTo(0, 0)
+      .lineTo(-length, length * -2)
+      .lineTo(length, length * -2)
+      .lineTo(0, 0);
 
     const extrudeSettings = {
       depth: 4,
@@ -25,7 +25,7 @@ export const Triangle = forwardRef<THREE.Mesh, Props>(
     };
 
     return (
-      <mesh ref={ref}>
+      <mesh ref={ref} position={[x, y, 0]}>
         <extrudeGeometry args={[shape, extrudeSettings]} />
         <meshStandardMaterial color="#eec036" />
       </mesh>
