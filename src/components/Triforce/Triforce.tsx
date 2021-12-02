@@ -41,15 +41,7 @@ function useTrianglePosition(
   };
 }
 
-interface Props {
-  play(): void;
-}
-
-export function Triforce({ play }: Props) {
-  useEffect(() => {
-    play();
-  }, [play]);
-
+export function Triforce() {
   const { x: topX, y: topY, ref: topRef } = useTrianglePosition(0, 104, 0, 24);
 
   const { x: leftX, y: leftY, ref: leftRef } = useTrianglePosition(
@@ -70,11 +62,11 @@ export function Triforce({ play }: Props) {
   );
 
   return (
-    <>
+    <group position={[0, -5, 0]}>
       <Triangle ref={topRef} x={topX} y={topY} />
       <Triangle ref={leftRef} x={leftX} y={leftY} />
       <Triangle ref={rightRef} x={rightX} y={rightY} />
-    </>
+    </group>
   );
 }
 

@@ -1,0 +1,105 @@
+.StartContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+  transition: opacity 0.33s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .StartContainer {
+    opacity: 0.5;
+  }
+}
+
+.StartContainer:hover,
+.StartContainer:focus-within {
+  opacity: 1;
+}
+
+.Start {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  color: currentColor;
+  cursor: pointer;
+  font-size: 6rem;
+}
+
+.Start:focus {
+  outline-color: currentColor;
+}
+
+.MainContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #8d9fe0;
+}
+
+.MainContainer::before,
+.MainContainer::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: var(--background);
+}
+
+.MainContainer::before {
+  top: 0;
+}
+.MainContainer::after {
+  bottom: 0;
+}
+
+.TitleContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-shadow: 0 0 2px var(--background);
+}
+
+h1 {
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+}
+
+.Legend {
+  position: relative;
+  top: 10px;
+  left: 90px;
+}
+
+.Zelda {
+  color: #bc140f;
+  font-size: 8rem;
+}
+
+.Link {
+  position: relative;
+  top: -10px;
+  left: 105px;
+}
+
+footer {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  font-size: 1rem;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
