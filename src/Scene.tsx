@@ -11,6 +11,7 @@ import styles from "./Scene.module.css";
 
 export function Scene() {
   const [isStarted, setIsStarted] = useState(false);
+  const [isAnimationDone, setIsAnimationDone] = useState(false);
 
   const [play] = useSound(titleSound);
 
@@ -22,7 +23,7 @@ export function Scene() {
           type="button"
           onClick={() => {
             setIsStarted(true);
-            // play();
+            play();
           }}
         >
           Start
@@ -32,9 +33,13 @@ export function Scene() {
     );
 
   return (
-    <div className={styles.MainContainer}>
+    <div
+      className={`${styles.MainContainer} ${
+        isAnimationDone ? styles.TransitionDone : ""
+      }`}
+    >
       <Canvas style={{ zIndex: 1 }} camera={{ position: [0, 0, -130] }}>
-        <Triforce />
+        <Triforce onFinish={() => setIsAnimationDone(true)} />
         <pointLight position={[0, 0, -200]} />
       </Canvas>
       <div className={styles.TitleContainer}>

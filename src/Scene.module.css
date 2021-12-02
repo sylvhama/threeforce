@@ -1,9 +1,14 @@
+:root {
+  --reveal-duration: 0.33s;
+  --reveal-delay: 1.2s;
+}
+
 .StartContainer {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   text-align: center;
-  transition: opacity 0.33s ease;
+  transition: opacity var(--reveal-duration) ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -34,7 +39,20 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  background-color: var(--background);
+  transition: background-color var(--reveal-duration) ease;
+  transition-delay: var(--reveal-delay);
+}
+
+.TransitionDone {
   background-color: #8d9fe0;
+}
+
+.MainContainer.TransitionDone::before,
+.MainContainer.TransitionDone::after,
+.MainContainer.TransitionDone .TitleContainer,
+.MainContainer.TransitionDone footer {
+  opacity: 1;
 }
 
 .MainContainer::before,
@@ -46,6 +64,7 @@
   width: 100%;
   height: 100px;
   background-color: var(--background);
+  opacity: 0;
 }
 
 .MainContainer::before {
@@ -65,6 +84,9 @@
   display: grid;
   place-items: center;
   text-shadow: 0 0 2px var(--background);
+  opacity: 0;
+  transition: opacity var(--reveal-duration) ease;
+  transition-delay: var(--reveal-delay);
 }
 
 h1 {
@@ -96,10 +118,13 @@ footer {
   position: fixed;
   bottom: 60px;
   left: 0;
-  z-index: 2;
+  z-index: 3;
   width: 100%;
   font-size: 1rem;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  opacity: 0;
+  transition: opacity var(--reveal-duration) ease;
+  transition-delay: var(--reveal-delay);
 }
