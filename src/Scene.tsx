@@ -72,7 +72,9 @@ export function Scene() {
         <pointLight position={[0, 0, -200]} />
       </Canvas>
       <Title />
-      <footer>© 2021 Sylvain Hamann </footer>
+      <footer>
+        © 2021 <a href="https://shamann.dev">Sylvain Hamann</a>
+      </footer>
     </div>
   );
 }

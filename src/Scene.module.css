@@ -149,9 +149,21 @@ footer {
   width: 100%;
   font-size: 1rem;
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   opacity: 0;
   transition: opacity var(--reveal-duration) ease;
   transition-delay: 1.2s;
+}
+footer,
+footer a {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+footer a {
+  color: currentColor;
+  text-decoration: none;
+  outline-color: currentColor;
+}
+footer a:hover {
+  color: currentColor;
+  text-decoration: underline;
 }
