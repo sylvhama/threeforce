@@ -1,0 +1,13 @@
+.FadeIn {
+  animation: fadein var(--reveal-duration) ease 1.2s 1 normal both;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

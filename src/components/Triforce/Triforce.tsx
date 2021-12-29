@@ -104,7 +104,3 @@ export function Triforce({ onFinish }: Props) {
     </group>
   );
 }
-
-// 0 24
-// 9 6
-// -9 6

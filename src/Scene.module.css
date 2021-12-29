@@ -1,39 +1,3 @@
-:root {
-  --reveal-duration: 0.33s;
-}
-
-.StartContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  text-align: center;
-  transition: opacity var(--reveal-duration) ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .StartContainer {
-    opacity: 0.5;
-  }
-}
-
-.StartContainer:hover,
-.StartContainer:focus-within {
-  opacity: 1;
-}
-
-.Start {
-  border: none;
-  padding: 0;
-  background-color: transparent;
-  color: currentColor;
-  cursor: pointer;
-  font-size: 6rem;
-}
-
-.Start:focus {
-  outline-color: currentColor;
-}
-
 .MainContainer {
   position: relative;
   width: 100vw;
@@ -43,127 +7,21 @@
   transition-delay: 2.5s;
 }
 
-.TransitionDone {
-  background-color: #8d9fe0;
-}
-
-.MainContainer.TransitionDone::before,
-.MainContainer.TransitionDone::after,
-.MainContainer.TransitionDone .TitleWrapper,
-.MainContainer.TransitionDone footer {
-  opacity: 1;
-}
-
-.MainContainer.TransitionDone .Sword {
-  transform: translateY(0);
-}
-
 .MainContainer::before,
 .MainContainer::after {
   content: "";
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   left: 0;
   width: 100%;
   height: 100px;
   background-color: var(--background);
-  opacity: 0;
 }
 
 .MainContainer::before {
   top: 0;
 }
+
 .MainContainer::after {
   bottom: 0;
-}
-
-.TitleWrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  text-shadow: 0 0 2px var(--background);
-  opacity: 0;
-  transition: opacity var(--reveal-duration) ease;
-  transition-delay: 1.2s;
-}
-
-.TitleContainer {
-  position: relative;
-}
-
-.Sword {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  height: 200px;
-  transform: translateY(-100vh);
-  transition: transform var(--reveal-duration)
-    cubic-bezier(0.36, 0, 0.66, -0.56);
-  transition-delay: 2.2s;
-}
-
-.Z {
-  position: absolute;
-  top: 2rem;
-  user-select: none;
-  clip-path: polygon(0% 50%, 100% 10%, 30% 90%, 0% 90%);
-  text-shadow: none;
-}
-
-h1 {
-  margin: 0;
-  line-height: 1;
-  display: flex;
-  flex-direction: column;
-  font-size: 2rem;
-}
-
-.Legend {
-  position: relative;
-  top: 10px;
-  left: 90px;
-}
-
-.Zelda,
-.Z {
-  color: #bc140f;
-  font-size: 8rem;
-}
-
-.Link {
-  position: relative;
-  top: -10px;
-  left: 105px;
-}
-
-footer {
-  position: fixed;
-  bottom: 60px;
-  left: 0;
-  z-index: 3;
-  width: 100%;
-  font-size: 1rem;
-  text-align: center;
-  opacity: 0;
-  transition: opacity var(--reveal-duration) ease;
-  transition-delay: 1.2s;
-}
-footer,
-footer a {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-footer a {
-  color: currentColor;
-  text-decoration: none;
-  outline-color: currentColor;
-}
-footer a:hover {
-  color: currentColor;
-  text-decoration: underline;
 }

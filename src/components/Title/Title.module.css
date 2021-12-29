@@ -1,0 +1,70 @@
+.TitleWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-shadow: 0 0 2px var(--background);
+  transition-delay: 1.2s;
+}
+
+.TitleContainer {
+  position: relative;
+}
+
+.Sword {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  height: 200px;
+  animation: slidedown var(--reveal-duration) cubic-bezier(0.36, 0, 0.66, -0.56)
+    2.2s 1 normal both;
+}
+
+@keyframes slidedown {
+  from {
+    transform: translateY(-100vh);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.Z {
+  position: absolute;
+  top: 2rem;
+  user-select: none;
+  clip-path: polygon(0% 50%, 100% 10%, 30% 90%, 0% 90%);
+  text-shadow: none;
+}
+
+h1 {
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  outline: none;
+}
+
+.Legend {
+  position: relative;
+  top: 10px;
+  left: 90px;
+}
+
+.Zelda,
+.Z {
+  color: #bc140f;
+  font-size: 8rem;
+}
+
+.Link {
+  position: relative;
+  top: -10px;
+  left: 105px;
+}
