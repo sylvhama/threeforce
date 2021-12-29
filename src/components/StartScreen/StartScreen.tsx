@@ -1,3 +1,5 @@
+import { Center } from "components";
+
 // @ts-ignore
 import styles from "./StartScreen.module.css";
 
@@ -7,16 +9,18 @@ interface Props {
 
 export function StartScreen({ start }: Props) {
   return (
-    <div className={styles.StartContainer}>
-      <button
-        className={styles.Start}
-        type="button"
-        onClick={start}
-        aria-describedby="warning"
-      >
-        Start
-      </button>
-      <small id="warning">there will be sound</small>
-    </div>
+    <Center>
+      <div className={styles.StartContainer}>
+        <button
+          className={styles.Start}
+          type="button"
+          onClick={start}
+          aria-describedby="warning"
+        >
+          Start
+        </button>
+        <small id="warning">there will be sound</small>
+      </div>
+    </Center>
   );
 }

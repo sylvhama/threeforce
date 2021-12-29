@@ -15,28 +15,32 @@ export function Scene() {
 
   const [playTitle] = useSound(titleSound);
 
-  if (!isStarted)
-    return (
-      <StartScreen
-        start={() => {
-          setIsStarted(true);
-          playTitle();
-          document.querySelector("main")?.focus();
-        }}
-      />
-    );
-
   return (
     <div
       style={{ backgroundColor: isAnimationDone ? "#8d9fe0" : undefined }}
       className={styles.MainContainer}
     >
-      {isAnimationDone && <Title />}
+      {!isStarted && (
+        <StartScreen
+          start={() => {
+            setIsStarted(true);
+            playTitle();
+            document.querySelector("main")?.focus();
+          }}
+        />
+      )}
+
       <Canvas style={{ zIndex: 2 }} camera={{ position: [0, 0, -130] }}>
-        <Triforce onFinish={() => setIsAnimationDone(true)} />
+        {isStarted && <Triforce onFinish={() => setIsAnimationDone(true)} />}
         <pointLight position={[0, 0, -200]} />
       </Canvas>
-      {isAnimationDone && <Footer />}
+
+      {isAnimationDone && (
+        <>
+          <Title />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }

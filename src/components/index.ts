@@ -1,3 +1,4 @@
+export { Center } from "./Center";
 export { FadeIn } from "./FadeIn";
 export { Footer } from "./Footer";
 export { StartScreen } from "./StartScreen";

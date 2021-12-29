@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import useSound from "use-sound";
 
-import { FadeIn } from "components";
+import { FadeIn, Center } from "components";
 
 // @ts-ignore
 import masterSword from "assets/mastersword.gif";
@@ -16,7 +16,7 @@ export function Title() {
   const [playSword] = useSound(swordSound);
 
   return (
-    <div className={styles.TitleWrapper}>
+    <Center>
       <FadeIn>
         <div className={styles.TitleContainer}>
           <img
@@ -35,6 +35,6 @@ export function Title() {
           </h1>
         </div>
       </FadeIn>
-    </div>
+    </Center>
   );
 }
