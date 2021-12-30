@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 
 import { Triangle } from "./components";
@@ -20,7 +20,7 @@ function createPosition(
     originX,
     originY,
     destinationX,
-    destinationY
+    destinationY,
   };
 }
 
@@ -28,9 +28,12 @@ const topPosition = createPosition(0, 104, 0, 24);
 const leftPosition = createPosition(89, -72, 9, 6);
 const rightPosition = createPosition(-89, -72, -9, 6);
 
-function useTrianglePosition(position: Position, down = true, left = true) {
-  const [x, setX] = useState(position.originX);
-  const [y, setY] = useState(position.originY);
+function useTrianglePosition(
+  position: Position,
+  down = true,
+  left = true
+): [React.RefObject<THREE.Mesh>, boolean] {
+  const [hasFinished, setHasFinished] = useState(false);
   const ref = useRef<THREE.Mesh>(null);
 
   useFrame(() => {
@@ -39,24 +42,26 @@ function useTrianglePosition(position: Position, down = true, left = true) {
       const stepY = down ? -step : step;
       const stepX = left ? -step : step;
 
-      if (y !== position.destinationY) {
-        setY((y) => y + stepY);
+      if (ref.current.position.y !== position.destinationY) {
+        ref.current.position.y = ref.current.position.y + stepY;
         ref.current.rotateY(0.08);
-      } else {
-        ref.current.rotation.y = 0;
       }
 
-      if (x !== position.destinationX) {
-        setX((x) => x + stepX);
+      if (ref.current.position.x !== position.destinationX) {
+        ref.current.position.x = ref.current.position.x + stepX;
+      }
+
+      if (
+        ref.current.position.y === position.destinationY &&
+        ref.current.position.x === position.destinationX
+      ) {
+        ref.current.rotation.y = 0;
+        setHasFinished(true);
       }
     }
   });
 
-  return {
-    x,
-    y,
-    ref
-  };
+  return [ref, hasFinished];
 }
 
 interface Props {
@@ -64,43 +69,37 @@ interface Props {
 }
 
 export function Triforce({ onFinish }: Props) {
-  const { x: topX, y: topY, ref: topRef } = useTrianglePosition(topPosition);
-
-  const { x: leftX, y: leftY, ref: leftRef } = useTrianglePosition(
-    leftPosition,
-    false
-  );
-
-  const { x: rightX, y: rightY, ref: rightRef } = useTrianglePosition(
+  const [topRef, topHasFinished] = useTrianglePosition(topPosition);
+  const [leftRef, leftHasFinished] = useTrianglePosition(leftPosition, false);
+  const [rightRef, rightHasFinished] = useTrianglePosition(
     rightPosition,
     false,
     false
   );
 
   useEffect(() => {
-    if (
-      topY === topPosition.destinationY &&
-      topX === topPosition.destinationX
-    ) {
-      if (
-        leftY === leftPosition.destinationY &&
-        leftX === leftPosition.destinationX
-      ) {
-        if (
-          rightY === rightPosition.destinationY &&
-          rightX === rightPosition.destinationX
-        ) {
-          onFinish();
-        }
-      }
+    if (topHasFinished && leftHasFinished && rightHasFinished) {
+      onFinish();
     }
-  }, [onFinish, topY, topX, leftY, leftX, rightY, rightX]);
+  }, [topHasFinished, leftHasFinished, rightHasFinished]);
 
   return (
     <group position={[0, -5, 0]}>
-      <Triangle ref={topRef} x={topX} y={topY} />
-      <Triangle ref={leftRef} x={leftX} y={leftY} />
-      <Triangle ref={rightRef} x={rightX} y={rightY} />
+      <Triangle
+        originX={topPosition.originX}
+        originY={topPosition.originY}
+        ref={topRef}
+      />
+      <Triangle
+        originX={leftPosition.originX}
+        originY={leftPosition.originY}
+        ref={leftRef}
+      />
+      <Triangle
+        originX={rightPosition.originX}
+        originY={rightPosition.originY}
+        ref={rightRef}
+      />
     </group>
   );
 }
