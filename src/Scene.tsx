@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import useSound from "use-sound";
 
@@ -14,6 +14,15 @@ export function Scene() {
   const [isAnimationDone, setIsAnimationDone] = useState(false);
 
   const [playTitle] = useSound(titleSound);
+
+  useEffect(() => {
+    if (isStarted) {
+      const timer = setTimeout(() => {
+        setIsAnimationDone(true);
+      }, 5200);
+      return () => clearTimeout(timer);
+    }
+  }, [isStarted]);
 
   return (
     <div
@@ -31,7 +40,7 @@ export function Scene() {
       )}
 
       <Canvas style={{ zIndex: 2 }} camera={{ position: [0, 0, -130] }}>
-        {isStarted && <Triforce onFinish={() => setIsAnimationDone(true)} />}
+        {isStarted && <Triforce />}
         <pointLight position={[0, 0, -200]} />
       </Canvas>
 
