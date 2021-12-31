@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
+    "@react-spring/three": "^9.3.2",
     "@types/three": "0.134.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -29,5 +30,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  }
 }
