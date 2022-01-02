@@ -43,7 +43,7 @@ export const Triangle = ({
       rotationY: Math.PI * 10,
       scale: 1,
     },
-    from: { position: [originX, originY, 0], rotationY: 0, scale: 0.25 },
+    from: { position: [originX, originY, 0], rotationY: 0, scale: 0.1 },
     config: {
       duration: 5300,
     },
